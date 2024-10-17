@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Form</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif; 
+            background-color: #e3f2fd; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .signup-container {
+            background: #ffffff;
+            padding: 40px; /* Increased padding */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Softer shadow */
+            width: 400px; /* Increased width for better visibility */
+        }
+
+        .signup-container h2 {
+            text-align: center;
+            margin-bottom: 30px; /* Increased margin for better spacing */
+            font-size: 24px; /* Larger font size for heading */
+            color: #007bff; /* Blue color for the header */
+        }
+
+        .form-group {
+            margin-bottom: 20px; /* Increased margin */
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px; /* Increased padding for larger inputs */
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px; /* Larger font size for inputs */
+        }
+
+        .form-group input:focus {
+            border-color: #007bff; /* Blue border on focus */
+            outline: none;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px; /* Increased padding for larger button */
+            background-color: #007bff; /* Blue button color */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px; /* Larger font size for button */
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+
+        /* Additional styles for responsive design */
+        @media (max-width: 768px) {
+            .signup-container {
+                width: 90%; /* Responsive width for tablets */
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <h2>Signup</h2>
+        <form action="http://localhost:3000/signup" method="POST">
+            <div class="form-group">
+                <label for="first-name" class="required">First Name</label>
+                <input type="text" id="first-name" name="firstName" placeholder="First Name" required>
+            </div>
+            <div class="form-group">
+                <label for="last-name" class="required">Last Name</label>
+                <input type="text" id="last-name" name="lastName" placeholder="Last Name" required>
+            </div>
+            <div class="form-group">
+                <label for="email" class="required">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="Email Address" required>
+            </div>
+            <div class="form-group">
+                <label for="phone" class="required">Phone Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="Phone Number" required>
+            </div>
+            <div class="form-group">
+                <label for="password" class="required">Password</label>
+                <input type="password" id="password" name="password" placeholder="Password" required>
+            </div>
+            <div class="form-group">
+                <label for="confirm-password" class="required">Confirm Password</label>
+                <input type="password" id="confirm-password" placeholder="Confirm Password" required>
+            </div>
+            <button class="submit-btn" type="submit">Send OTP</button>
+        </form>
+        <div class="login-link">
+            <p>Have an account? <a href="Log_in.html">Login</a></p>
+        </div>
+    </div>
+    
+<script>
+    function submitForm() {
+        alert("Form submitted successfully!");
+    }
+</script>
+
+</body>
+</html>

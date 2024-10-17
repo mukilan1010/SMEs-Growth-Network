@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DPIIT FORM</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <form id="multiStepForm">
+
+      <div class="form-step active">
+        <h2>Basic Info</h2>
+        
+        <label for="startupName" class="required">Startup Name:</label>
+        <input type="text" id="startupName" name="startupName" placeholder="Enter the name" required>
+
+        <label for="natureOfEntity" class="required">Nature of Entity:</label>
+        <select id="natureOfEntity" name="natureOfEntity" required>
+          <option value="">Select</option>
+          <option value="privateLimited">Private Limited Company</option>
+          <option value="publicLimited">Public Limited Company</option>
+          <option value="llp">Limited Liability Partnership (LLP)</option>
+          <option value="proprietorship">Sole Proprietorship</option>
+          <option value="partnership">Partnership</option>
+          <option value="ngo">Non-Governmental Organization (NGO)</option>
+          <option value="cooperative">Cooperative Society</option>
+          <option value="other">Other</option>
+        </select>
+
+        <label for="cin">CIN No.:</label>
+        <input type="text" id="cin" name="cin" placeholder="Enter the CIN no.">
+
+        <label for="pan">PAN:</label>
+        <input type="text" id="pan" name="pan" placeholder="Enter the PAN no.">
+
+        <label for="dpiit">DPIIT Registration No.:</label>
+        <input type="text" id="dpiit" name="dpiit" placeholder="Enter DPIIT Registration No.">
+
+        <label for="gst" class="required">GST Registration No.:</label>
+        <input type="text" id="gst" name="gst" placeholder="Enter the GST no." required>
+
+        <label for="gstAuthorizedName" class="required">GST Authorized Name:</label>
+        <input type="text" id="gstAuthorizedName" name="gstAuthorizedName" placeholder="Enter GST Authorized Name" required>
+
+        <label for="email" class="required">Company Email Address:</label>
+        <input type="email" id="email" name="email" placeholder="Enter the email" required>
+
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" placeholder="Enter the phone no.">
+
+        <label for="sector" class="required">Sector:</label>
+        <input type="text" id="sector" name="sector" placeholder="Enter the Sector" required>
+
+        <label for="businessModel">Business Model:</label>
+        <select id="businessModel" name="businessModel">
+          <option value="">Select</option>
+          <option value="b2b">B2B</option>
+          <option value="b2c">B2C</option>
+          <option value="c2c">C2C</option>
+          <option value="d2c">D2C</option>
+          <option value="b2g">B2G</option>
+          <option value="b2b2c">B2B2C</option>
+          <option value="other">Other</option>
+        </select>
+
+        <label for="yearOfReg" class="required">Year of Registration:</label>
+        <select id="yearOfReg" name="yearOfReg" required>
+          <option value="">Select</option>
+          <script>
+            const currentYear = new Date().getFullYear();
+            for (let year = 1800; year <= currentYear; year++) {
+              document.write(`<option value="${year}">${year}</option>`);
+            }
+          </script>
+        </select>
+
+        <button type="button" onclick="submitDpiitForm()">Submit</button>
+      </div>
+
+    </form>
+  </div>
+
+  <script>
+    function submitDpiitForm() {
+        const startupName = document.getElementById('startupName').value;
+        const natureOfEntity = document.getElementById('natureOfEntity').value;
+        const cin = document.getElementById('cin').value;
+        const pan = document.getElementById('pan').value;
+        const dpiitRegistrationNo = document.getElementById('dpiit').value;
+        const gstRegistrationNo = document.getElementById('gst').value;
+        const gstAuthorizedName = document.getElementById('gstAuthorizedName').value;
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById('phone').value;
+        const sector = document.getElementById('sector').value;
+        const businessModel = document.getElementById('businessModel').value;
+        const yearOfReg = document.getElementById('yearOfReg').value;
+
+        // Check if required fields are filled
+        if (!startupName || !natureOfEntity || !gstRegistrationNo || !gstAuthorizedName || !email || !sector || !yearOfReg) {
+            alert("Please fill out all required fields.");
+            return;
+        }
+
+        // Send form data to the backend
+        fetch('http://localhost:5000/dpiit-form', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                startupName: startupName,
+                natureOfEntity: natureOfEntity,
+                cin: cin,
+                pan: pan,
+                dpiitRegistrationNo: dpiitRegistrationNo,
+                gstRegistrationNo: gstRegistrationNo,
+                gstAuthorizedName: gstAuthorizedName,
+                email: email,
+                phone: phone,
+                sector: sector,
+                businessModel: businessModel,
+                yearOfReg: yearOfReg
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message === 'DPIIT form submitted successfully') {
+                // Show popup and then redirect to Flipkart
+                if (confirm('DPIIT form submitted successfully! Click OK to proceed to Flipkart.')) {
+                    window.location.href = 'DPIIT2.html';
+                }
+            } else if (data.error) {
+                alert(data.error); // If there's an error, display it
+            } else {
+                alert("An unknown error occurred.");
+            }
+        })
+        .catch(error => {
+            alert("Error submitting form");
+            console.error('Error:', error);
+        });
+    }
+  </script>
+
+</body>
+</html>

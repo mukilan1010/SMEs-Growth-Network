@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StartupTN Ecosystem</title>
+    <link rel="stylesheet" type="text/css" href="../get started/GET_STARTED.css">
+    <style>
+        /* Add styling for the video background */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .video-background {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: -1; /* Ensure the video stays behind the content */
+        }
+
+        .container {
+            position: relative;
+            z-index: 1; /* Bring the content in front of the video */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            color: white;
+        }
+
+        .content {
+            background: rgba(0, 0, 0, 0.5); /* Slight background for readability */
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .profile-options button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Video -->
+    <video autoplay muted loop class="video-background">
+        <source src="C:\\Users\\mukil\\Downloads\\background-video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="container">
+        <div class="content">
+            <h1>Your Complete Ecosystem</h1>
+            <p>Select your Profile Type</p>
+            <div class="profile-options">
+                <button onclick="location.href='../get started/get started forms/A_startup/A_startup.html'">Startups</button>
+                <button onclick="location.href='../get started/get started forms/A_startup/A_startup forms/A_startup sign_up.html'">Mentors</button>
+                <button onclick="location.href='../get started/get started forms/A_investors/A_investors.html'">Investors</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

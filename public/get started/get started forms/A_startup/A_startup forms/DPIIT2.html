@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Address Form</title>
+    <style>
+        /* Basic Form Styling */
+form.multiStepForm {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f4f4f4;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Headings */
+form.multiStepForm h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+form.multiStepForm h3 {
+    font-size: 20px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    color: #555;
+}
+
+/* Form Labels */
+form.multiStepForm label {
+    display: block;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.required::after {
+    content: '*';
+    color: red;
+    margin-left: 4px;
+}
+
+/* Input Fields */
+form.multiStepForm input[type="text"],
+form.multiStepForm input[type="url"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+form.multiStepForm input:focus {
+    border-color: #66b3ff;
+    outline: none;
+}
+
+/* Submit Button */
+form.multiStepForm button {
+    display: inline-block;
+    padding: 12px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+}
+
+form.multiStepForm button:hover {
+    background-color: #45a049;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    form.multiStepForm {
+        padding: 15px;
+    }
+
+    form.multiStepForm input[type="text"],
+    form.multiStepForm input[type="url"] {
+        font-size: 14px;
+    }
+
+    form.multiStepForm button {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+}
+
+     
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form class="multiStepForm" id="dpiit2Form">
+            <div class="form-step">
+                <h2 style="text-align: center;">Address Details</h2>
+
+                <label for="country" class="required">Country:</label>
+                <input type="text" id="country" name="country" placeholder="Enter the country" required>
+
+                <label for="state" class="required">State:</label>
+                <input type="text" id="state" name="state" placeholder="Enter the State" required>
+
+                <label for="district" class="required">District:</label>
+                <input type="text" id="district" name="district" placeholder="Enter the district" required>
+
+                <label for="zip" class="required">Pincode:</label>
+                <input type="text" id="zip" name="zip" placeholder="Enter the Pincode" required>
+
+                <h3>Social Links</h3>
+
+                <label for="linkedin">LinkedIn:</label>
+                <input type="url" id="linkedin" name="linkedin" placeholder="LinkedIn Profile URL">
+
+                <label for="website">Website URL:</label>
+                <input type="url" id="website" name="website" placeholder="Enter Website URL">
+
+                <label for="twitter">Twitter:</label>
+                <input type="url" id="twitter" name="twitter" placeholder="Twitter Profile URL">
+
+                <label for="facebook">Facebook:</label>
+                <input type="url" id="facebook" name="facebook" placeholder="Facebook Profile URL">
+
+                <button type="button" onclick="submitForm()">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        async function submitForm() {
+            const form = document.getElementById('dpiit2Form');
+            const formData = new FormData(form);
+
+            const data = {
+                country: formData.get('country'),
+                state: formData.get('state'),
+                district: formData.get('district'),
+                zip: formData.get('zip'),
+                linkedin: formData.get('linkedin'),
+                website: formData.get('website'),
+                twitter: formData.get('twitter'),
+                facebook: formData.get('facebook')
+            };
+
+            try {
+                const response = await fetch('http://localhost:5000/dpiit2-form', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+                if (result.message === 'DPIIT2 form submitted successfully') {
+                    window.location.href = 'DPIIT3.html';  // Redirect to Amazon on success
+                } else {
+                    alert(result.error || 'Error submitting form');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+    </script>
+</body>
+</html>

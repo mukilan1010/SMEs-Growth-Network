@@ -1,0 +1,135 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #004080, #0050a0); /* Background gradient */
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+}
+
+.container {
+    max-width: 1200px; /* Maximum container width */
+    margin: 0 auto;
+    padding: 40px; /* Padding for the container */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content */
+}
+
+.content {
+    background-color: white; /* White background for the content */
+    padding: 60px; /* Padding for content */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    max-width: 600px; /* Maximum content width */
+    width: 100%; /* Full width */
+    text-align: center; /* Center text */
+}
+
+h1 {
+    font-size: 48px; /* Main heading size */
+    margin-bottom: 20px; /* Space below heading */
+}
+
+p {
+    color: #666; /* Subtitle color */
+    margin-bottom: 20px; /* Space below paragraph */
+    font-size: 24px; /* Font size */
+}
+
+.profile-selection {
+    margin-bottom: 40px; /* Space below profile selection */
+}
+
+.profile-button {
+    padding: 20px; /* Button padding */
+    border: 1px solid #ccc; /* Button border */
+    border-radius: 10px; /* Button corners */
+    background-color: #f9f9f9; /* Button background color */
+    cursor: pointer; /* Pointer on hover */
+    font-size: 24px; /* Button font size */
+    width: 100%; /* Full width button */
+}
+
+.subtitle {
+    font-size: 1.2em; /* Subtitle size */
+    margin-bottom: 20px; /* Space below subtitle */
+    color: #666; /* Subtitle color */
+}
+
+.role-selection {
+    display: flex; /* Flex layout for role options */
+    justify-content: center; /* Center role options */
+    gap: 20px; /* Space between buttons */
+    margin-bottom: 40px; /* Space below role selection */
+    flex-wrap: wrap; /* Wrap buttons on smaller screens */
+}
+
+.role-option {
+    padding: 20px; /* Padding for role options */
+    border: 2px solid #ccc; /* Border for role options */
+    border-radius: 10px; /* Rounded corners for role options */
+    cursor: pointer; /* Pointer on hover */
+    text-align: center; /* Center text */
+    transition: all 0.3s; /* Smooth transition */
+    width: 250px; /* Fixed width for role options */
+    font-size: 20px; /* Font size for role options */
+    background-color: #f9f9f9; /* Background color */
+}
+
+.role-option:hover {
+    border-color: #004080; /* Highlight on hover */
+}
+
+.role-option.selected {
+    border-color: #004080; /* Highlight selected option */
+    background-color: #e6f0ff; /* Background color for selected */
+}
+
+
+
+/* Media Query for Tablets */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 36px; /* Smaller heading for tablets */
+    }
+
+    .role-option {
+        width: 45%; /* Adjusted width for tablets */
+        font-size: 22px; /* Font size for role options */
+    }
+
+    .profile-button {
+        padding: 20px; /* Adjusted padding */
+        font-size: 22px; /* Adjusted font size */
+    }
+}
+
+/* Media Query for Mobile Devices */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 28px; /* Smaller heading for mobile */
+    }
+
+    p {
+        font-size: 18px; /* Smaller paragraph for mobile */
+    }
+
+    .profile-button, .continue-button {
+        font-size: 20px; /* Adjusted font size */
+        padding: 15px 20px; /* Adjusted padding */
+    }
+
+    .role-option {
+        width: 100%; /* Full width on mobile */
+        font-size: 20px; /* Font size for role options */
+        padding: 20px; /* Padding for role options */
+    }
+}

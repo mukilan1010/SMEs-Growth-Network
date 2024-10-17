@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Step Form with Organization Info</title>
+    <style>
+        * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #004080, #0050a0); /* Blue gradient background */
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form-container {
+    background-color: white;
+    padding: 40px; /* Increased padding for spacious feel */
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Softer shadow */
+    width: 400px; /* Fixed width */
+}
+
+.form-container h2, .form-container h3, .form-container h4 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #007bff; /* Blue color for headings */
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.required:after {
+    content: " *";
+    color: red; /* Indicates required fields */
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 5px; /* Rounded corners */
+    margin-bottom: 10px; /* Space between inputs */
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #007bff; /* Change border color on focus */
+    outline: none; /* Remove default outline */
+}
+
+.form-group button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff; /* Blue button */
+    color: white; /* White text */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px; /* Font size for button */
+    cursor: pointer; /* Pointer cursor */
+    margin-bottom: 10px; /* Space below buttons */
+    transition: background-color 0.3s; /* Smooth background color transition */
+}
+
+.form-group button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Hide sections initially */
+#address-section,
+#more-info-section {
+    display: none; /* Hide these sections initially */
+}
+
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between; /* Space between navigation buttons */
+}
+
+/* Media Queries for responsive design */
+@media (max-width: 768px) {
+    .form-container {
+        width: 90%; /* Responsive width for tablets */
+        padding: 20px; /* Adjust padding for smaller screens */
+    }
+}
+
+@media (max-width: 576px) {
+    body {
+        align-items: flex-start; /* Align items at the top */
+        padding: 20px; /* Padding for smaller screens */
+    }
+
+    .form-container {
+        width: 100%; /* Full width for small screens */
+        padding: 10px; /* Reduced padding */
+    }
+
+    .form-group button {
+        padding: 8px; /* Reduced button padding */
+        font-size: 14px; /* Smaller font size */
+    }
+}
+
+@media (max-width: 400px) {
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 8px; /* Reduced input padding */
+    }
+
+    .form-group button {
+        padding: 6px; /* Further reduced button padding */
+        font-size: 12px; /* Even smaller font size */
+    }
+}
+
+
+    </style> <!-- Link to the external CSS file -->
+</head>
+<body>
+    <div class="form-container">
+        <!-- First Section (Basic Info) -->
+        <div id="basic-info-section">
+            <h2>Basic Info</h2>
+            <form id="info-form">
+                <div class="form-group">
+                    <label for="full-name" class="required">Full Name </label>
+                    <input type="text" id="full-name" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="required">Mail ID </label>
+                    <input type="email" id="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone-number" class="required">Phone Number </label>
+                    <input type="tel" id="phone-number" placeholder="Enter your phone number" required>
+                </div>
+                <div class="form-group">
+                    <label for="organization-name" class="required">Organization Name </label>
+                    <input type="text" id="organization-name" placeholder="Enter organization name" required>
+                </div>
+                <div class="form-group">
+                    <label for="designation" class="required">Designation </label>
+                    <select id="designation" required>
+                        <option value="">Select Designation</option>
+                        <option value="CEO">Chief Executive Officer</option>
+                        <option value="Vice President">Vice President</option>
+                        <option value="Project Lead">Project Lead</option>
+                        <option value="Project Owner">Project Owner</option>
+                        <option value="Service Owner">Service Owner</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="focused-sector" class="required">Focused Sector </label>
+                    <input type="text" id="focused-sector" placeholder="Enter the Focused Sector" required>
+                </div>
+                <div class="form-group">
+                    <label for="years-experience" class="required">Years of Experience </label>
+                    <select id="years-experience" required>
+                        <option value="">Select Experience</option>
+                        <option value="0-2">0-2 years</option>
+                        <option value="3-5">3-5 years</option>
+                        <option value="6-10">6-10 years</option>
+                        <option value="10+">10+ years</option>
+                     </select>
+                </div>
+                <div class="form-group">
+                    <label for="pan" class="required">PAN </label>
+                    <input type="text" id="pan" placeholder="Enter PAN" required>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="submit-btn" onclick="validateBasicInfo()">Next</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Second Section (Address and Social Links) -->
+        <div id="address-section" style="display:none;">
+            <h2>Address Details</h2>
+            <div class="form-group">
+                <label for="country" class="required">Country </label>
+                <input type="text" id="country" placeholder="Enter the country" required>
+            </div>
+            <div class="form-group">
+                <label for="state" class="required">State </label>
+                <input type="text" id="state" placeholder="Enter the State" required>
+            </div>
+            <div class="form-group">
+                <label for="district">District</label>
+                <input type="text" id="district" placeholder="Enter the district">
+            </div>
+            <div class="form-group">
+                <label for="zip" class="required">Pincode </label>
+                <input type="text" id="zip" placeholder="Enter the Pincode" required>
+            </div>
+
+            <h3>Social Links</h3>
+            <div class="form-group">
+                <label for="linkedin">LinkedIn</label>
+                <input type="url" id="linkedin" placeholder="Enter LinkedIn Profile URL">
+            </div>
+            <div class="form-group">
+                <label for="twitter">Twitter</label>
+                <input type="url" id="twitter" placeholder="Enter Twitter Profile URL">
+            </div>
+            <div class="form-group">
+                <label for="website">Website URL</label>
+                <input type="url" id="website" placeholder="Enter Website URL">
+            </div>
+
+            <div class="form-group navigation-buttons">
+                <button type="button" onclick="showBasicInfoSection()">Previous</button>
+                <button type="button" id="next-button" onclick="validateAddressSection()">Next</button>
+            </div>
+        </div>
+
+        <!-- Third Section (More Info) -->
+        <div id="more-info-section" style="display:none;">
+            <h2>More Info</h2>
+            <div class="form-group">
+                <label for="preferred-stage-of-startups" class="required">Preferred Stage Of Startups *</label>
+                <select id="preferred-stage-of-startups" required>
+                    <option value="">Select Preferred Stage Of Startups</option>
+                    <option value="Ideation">Ideation</option>
+                    <option value="Validation">Validation</option>
+                    <option value="MVP">MVP</option>
+                    <option value="Seed Stage">Seed Stage</option>
+                    <option value="Early Traction">Early Traction</option>
+                    <option value="Growth">Growth</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="brief-about-expertise" class="required">Brief About Your Expertise *</label>
+                <input type="text" id="brief-about-expertise" placeholder="Enter your Brief About Your Expertise" required>
+            </div>
+
+            <div class="form-group navigation-buttons">
+                <button type="button" onclick="showAddressSection()">Previous</button>
+                <button type="button" onclick="submitForm()">Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function validateBasicInfo() {
+            let valid = true;
+            const fields = ['full-name', 'email', 'phone-number', 'organization-name', 'designation', 'focused-sector', 'years-experience', 'pan'];
+            
+            fields.forEach(field => {
+                const input = document.getElementById(field);
+                if (!input.value.trim()) {
+                    valid = false;
+                }
+            });
+
+            if (!valid) {
+                alert("Please fill the form.");
+            } else {
+                document.getElementById('basic-info-section').style.display = 'none';
+                document.getElementById('address-section').style.display = 'block';
+            }
+        }
+
+        function validateAddressSection() {
+            let valid = true;
+            const fields = ['country', 'state', 'zip'];
+            
+            fields.forEach(field => {
+                const input = document.getElementById(field);
+                if (!input.value.trim()) {
+                    valid = false;
+                }
+            });
+
+            if (!valid) {
+                alert("Please fill the form.");
+            } else {
+                document.getElementById('address-section').style.display = 'none';
+                document.getElementById('more-info-section').style.display = 'block';
+            }
+        }
+
+        function validateMoreInfoSection() {
+            let valid = true;
+            const fields = ['preferred-stage-of-startups', 'brief-about-expertise'];
+            
+            fields.forEach(field => {
+                const input = document.getElementById(field);
+                if (!input.value.trim()) {
+                    valid = false;
+                }
+            });
+
+            return valid;
+        }
+
+        function submitForm() {
+            const isMoreInfoValid = validateMoreInfoSection();
+            if (!isMoreInfoValid) {
+                alert("Please fill the form.");
+                return;
+            }
+            alert("Form submitted successfully!");
+            // Here you can handle form submission logic
+        }
+
+        function showBasicInfoSection() {
+            document.getElementById('basic-info-section').style.display = 'block';
+            document.getElementById('address-section').style.display = 'none';
+        }
+
+        function showAddressSection() {
+            document.getElementById('address-section').style.display = 'block';
+            document.getElementById('more-info-section').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

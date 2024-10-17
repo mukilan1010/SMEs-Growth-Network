@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Step Form with Organization Info</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px; /* Maximum width for larger screens */
+            margin: 0 20px; /* Add margin for small screens */
+        }
+
+        .form-container h2,
+        .form-container h3,
+        .form-container h4 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .required:after {
+            content: " *";
+            color: red;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+
+        #address-section,
+        #more-info-section {
+            display: none;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Custom styles for More Info section */
+        #more-info-section .form-group div {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+            margin-top: 5px;
+        }
+
+        #more-info-section .form-group input[type="radio"] {
+            margin: 0;
+            transform: scale(1.2);
+        }
+
+        #more-info-section .form-group label {
+            margin-left: 5px;
+        }
+
+        .navigation-buttons button {
+            width: 45%;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .navigation-buttons button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Media Queries for Responsive Design */
+        @media (max-width: 480px) {
+            .form-container {
+                padding: 15px;
+                margin: 0 10px; /* Smaller margin for extra small screens */
+            }
+
+            .form-group button {
+                font-size: 14px; /* Smaller button text */
+            }
+
+            .form-container h2,
+            .form-container h3 {
+                font-size: 20px; /* Slightly smaller headings */
+            }
+        }
+
+        @media (min-width: 481px) and (max-width: 768px) {
+            .form-container {
+                padding: 20px;
+                margin: 0 15px; /* Medium margin for small to medium screens */
+            }
+
+            .form-group button {
+                font-size: 15px; /* Medium button text */
+            }
+
+            .form-container h2,
+            .form-container h3 {
+                font-size: 22px; /* Medium headings */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form-container">
+        <!-- First Section (Basic Info) -->
+        <div id="basic-info-section">
+            <h2>Basic Info</h2>
+            <form id="basicInfoForm">
+                <div class="form-group">
+                    <label for="privateEquityName" class="required">Revenue Based Financing Name</label>
+                    <input type="text" id="privateEquityName" placeholder="Revenue Based Financing name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="required">Mail ID</label>
+                    <input type="email" id="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber" class="required">Phone Number</label>
+                    <input type="tel" id="phoneNumber" placeholder="Enter phone number" required>
+                </div>
+                <div class="form-group">
+                    <label for="focusedSector" class="required">Focused Sector</label>
+                    <input type="text" id="focusedSector" placeholder="Enter Focused Sector" required>
+                </div>
+                <div class="form-group">
+                    <label for="pan" class="required">PAN</label>
+                    <input type="text" id="pan" placeholder="Enter PAN number" required>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="next-btn" onclick="validateBasicInfo()">Next</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Second Section (Address and Social Links) -->
+        <div id="address-section">
+            <h2>Address Details</h2>
+            <div class="form-group">
+                <label for="country" class="required">Country</label>
+                <input type="text" id="country" placeholder="Enter the country" required>
+            </div>
+            <div class="form-group">
+                <label for="state" class="required">State</label>
+                <input type="text" id="state" placeholder="Enter the state" required>
+            </div>
+            <div class="form-group">
+                <label for="district">District</label>
+                <input type="text" id="district" placeholder="Enter the district">
+            </div>
+            <div class="form-group">
+                <label for="zip" class="required">Pincode</label>
+                <input type="text" id="zip" placeholder="Enter the pincode" required>
+            </div>
+
+            <h3>Social Links</h3>
+            <div class="form-group">
+                <label for="linkedin">LinkedIn</label>
+                <input type="url" id="linkedin" placeholder="Enter LinkedIn Profile URL">
+            </div>
+            <div class="form-group">
+                <label for="facebook">Facebook</label>
+                <input type="url" id="facebook" placeholder="Enter Facebook Profile URL">
+            </div>
+            <div class="form-group">
+                <label for="portfolio">Portfolio</label>
+                <input type="url" id="portfolio" placeholder="Enter Portfolio URL">
+            </div>
+            <div class="form-group">
+                <label for="website">Website</label>
+                <input type="url" id="website" placeholder="Enter Website URL">
+            </div>
+
+            <div class="form-group navigation-buttons">
+                <button type="button" onclick="showBasicInfoSection()">Previous</button>
+                <button type="button" onclick="validateAddressSection()">Next</button>
+            </div>
+        </div>
+
+        <!-- Third Section (More Info) -->
+        <div id="more-info-section">
+            <h2>More Info</h2>
+            <div class="form-group">
+                <label for="expertise" class="required">Brief About Your Expertise</label>
+                <textarea id="expertise" placeholder="Enter your expertise" rows="4" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Have you onboarded yourself to TANFUND?</label>
+                <div>
+                    <input type="radio" id="tanfund-yes" name="tanfund" value="yes">
+                    <label for="tanfund-yes">Yes</label>
+
+                    <input type="radio" id="tanfund-no" name="tanfund" value="no" checked>
+                    <label for="tanfund-no">No</label>
+                </div>
+            </div>
+
+            <div class="form-group navigation-buttons" style="justify-content: center;">
+                <button type="button" onclick="showAddressSection()">Previous</button>
+                <button type="button" onclick="submitForm()" style="background-color: #007bff;">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function validateBasicInfo() {
+            let missingFields = [];
+
+            const ventureName = document.getElementById('privateEquityName'); // Updated ID
+            const email = document.getElementById('email');
+            const phoneNumber = document.getElementById('phoneNumber');
+            const focusedSector = document.getElementById('focusedSector');
+            const pan = document.getElementById('pan');
+
+            if (ventureName.value.trim() === '') {
+                missingFields.push('Private Equity Name');
+            }
+            if (email.value.trim() === '') {
+                missingFields.push('Mail ID');
+            }
+            if (phoneNumber.value.trim() === '') {
+                missingFields.push('Phone Number');
+            }
+            if (focusedSector.value.trim() === '') {
+                missingFields.push('Focused Sector');
+            }
+            if (pan.value.trim() === '') {
+                missingFields.push('PAN');
+            }
+
+            if (missingFields.length > 0) {
+                alert('Please fill out the form.'); // Updated alert message
+            } else {
+                showAddressSection();
+            }
+        }
+
+        function validateAddressSection() {
+            let missingFields = [];
+
+            const country = document.getElementById('country');
+            const state = document.getElementById('state');
+            const zip = document.getElementById('zip');
+
+            if (country.value.trim() === '') {
+                missingFields.push('Country');
+            }
+            if (state.value.trim() === '') {
+                missingFields.push('State');
+            }
+            if (zip.value.trim() === '') {
+                missingFields.push('Pincode');
+            }
+
+            if (missingFields.length > 0) {
+                alert('Please fill out the form.'); // Updated alert message
+            } else {
+                showMoreInfoSection();
+            }
+        }
+
+        function showAddressSection() {
+            document.getElementById('basic-info-section').style.display = 'none';
+            document.getElementById('address-section').style.display = 'block';
+            document.getElementById('more-info-section').style.display = 'none';
+        }
+
+        function showMoreInfoSection() {
+            document.getElementById('basic-info-section').style.display = 'none';
+            document.getElementById('address-section').style.display = 'none';
+            document.getElementById('more-info-section').style.display = 'block';
+        }
+
+        function showBasicInfoSection() {
+            document.getElementById('basic-info-section').style.display = 'block';
+            document.getElementById('address-section').style.display = 'none';
+            document.getElementById('more-info-section').style.display = 'none';
+        }
+
+        function submitForm() {
+            alert('Form submitted successfully!');
+            // You can add form submission logic here
+        }
+    </script>
+</body>
+
+</html>

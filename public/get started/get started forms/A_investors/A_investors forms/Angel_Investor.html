@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Step Form with Organization Info</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+
+        .form-container h2,
+        .form-container h3,
+        .form-container h4 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .required:after {
+            content: " *";
+            color: red;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+
+        #address-section,
+        #more-info-section {
+            display: none;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Styling for error messages */
+        small {
+            color: red;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form-container">
+        <!-- First Section (Basic Info) -->
+        <div id="basic-info-section">
+            <h2>Basic Info</h2>
+            <form id="info-form">
+                <div class="form-group">
+                    <label for="full-name">Full Name *</label>
+                    <input type="text" id="full-name" placeholder="Enter your full name">
+                    <small></small>
+                </div>
+                <div class="form-group">
+                    <label for="email">Mail ID *</label>
+                    <input type="email" id="email" placeholder="Enter your email">
+                    <small></small>
+                </div>
+                <div class="form-group">
+                    <label for="phone-number">Phone Number *</label>
+                    <input type="tel" id="phone-number" placeholder="Enter your phone number">
+                    <small></small>
+                </div>
+                <div class="form-group">
+                    <label for="organization-name">Organization Name *</label>
+                    <input type="text" id="organization-name" placeholder="Enter organization name">
+                    <small></small>
+                </div>
+                <div class="form-group">
+                    <label for="designation">Designation *</label>
+                    <select id="designation">
+                        <option value="">Select Designation</option>
+                        <option value="CEO">Chief Executive Officer</option>
+                        <option value="Vice President">Vice President</option>
+                        <option value="Project Lead">Project Lead</option>
+                        <option value="Project Owner">Project Owner</option>
+                        <option value="Service Owner">Service Owner</option>
+                    </select>
+                    <small></small>
+                </div>
+                <div class="form-group">
+                    <label for="focused-sector">Focused Sector *</label>
+                    <input type="text" id="focused-sector" placeholder="Enter the Focused Sector">
+                    <small></small>
+                </div>
+
+                <div class="form-group">
+                    <label for="pan">PAN *</label>
+                    <input type="text" id="pan" placeholder="Enter PAN">
+                    <small></small>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="submit-btn" onclick="validateBasicInfo()">Next</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Second Section (Address and Social Links) -->
+        <div id="address-section">
+            <h2>Address Details</h2>
+            <div class="form-group">
+                <label for="country" class="required">Country</label>
+                <input type="text" id="country" name="country" placeholder="Enter the country" required>
+                <small></small>
+            </div>
+            <div class="form-group">
+                <label for="state" class="required">State</label>
+                <input type="text" id="state" name="state" placeholder="Enter the State">
+                <small></small>
+            </div>
+            <div class="form-group">
+                <label for="district">District</label>
+                <input type="text" id="district" name="district" placeholder="Enter the district">
+                <small></small>
+            </div>
+            <div class="form-group">
+                <label for="zip" class="required">Pincode</label>
+                <input type="text" id="zip" name="zip" placeholder="Enter the Pincode">
+                <small></small>
+            </div>
+
+            <h3>Social Links</h3>
+            <div class="form-group">
+                <label for="linkedin">LinkedIn</label>
+                <input type="url" id="linkedin" placeholder="Enter LinkedIn Profile URL">
+            </div>
+            <div class="form-group">
+                <label for="twitter">Twitter</label>
+                <input type="url" id="twitter" placeholder="Enter Twitter Profile URL">
+            </div>
+            <div class="form-group">
+                <label for="website">Website URL</label>
+                <input type="url" id="website" placeholder="Enter Website URL">
+            </div>
+
+            <div class="form-group navigation-buttons">
+                <button type="button" onclick="showBasicInfoSection()">Previous</button>
+                <button type="button" id="next-button" onclick="validateAddressSection()">Next</button>
+            </div>
+        </div>
+
+        <!-- Third Section (More Info) -->
+        <div id="more-info-section">
+            <h2> More Info</h2>
+            <form id="moreInfoForm">
+                <div class="form-group">
+                    <label for="stage" class="required">Preferred Stage Of Startups</label>
+                    <select id="stage" required>
+                        <option value="">Select stage</option>
+                        <option value="seed">Seed</option>
+                        <option value="growth">Growth</option>
+                        <option value="Early Traction">Early Traction</option>
+                        <option value="MVP">MVP</option>
+                        <option value="Validation">Validation</option>
+                        <option value="Ideation">Ideation</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="ticketSize" class="required">Investment Ticket Size</label>
+                    <select id="ticketSize" required>
+                        <option value="">Select ticket size</option>
+                        <option value="Below 5 Lakhs">Below 5 Lakhs</option>
+                        <option value="5 Lakhs - 15 Lakhs">5 Lakhs - 15 Lakhs</option>
+                        <option value="15 lakhs - 1 Crore">15 lakhs - 1 Crore</option>
+                        <option value="1 Crore - 5 Crore">1 Crore - 5 Crore</option>
+                        <option value="Above 5 Crore">Above 5 Crore</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="expertise" class="required">Brief About Your Expertise</label>
+                    <textarea id="expertise" rows="4" placeholder="Enter your expertise" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Do you want to be a part of a network or co-invest?</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="network" value="yes" required> Yes</label>
+                        <label><input type="radio" name="network" value="no" required> No</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>If you're in your early stage as a startup, are you open to learning?</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="learning" value="yes" required> Yes</label>
+                        <label><input type="radio" name="learning" value="no" required> No</label>
+                    </div>
+                </div>
+
+                <div class="form-group navigation-buttons">
+                    <button type="button" onclick="showAddressSection()">Previous</button>
+                    <button type="button" id="submit-button" onclick="submitForm()">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function showBasicInfoSection() {
+            document.getElementById('basic-info-section').style.display = 'block';
+            document.getElementById('address-section').style.display = 'none';
+            document.getElementById('more-info-section').style.display = 'none';
+        }
+
+        function showAddressSection() {
+            document.getElementById('basic-info-section').style.display = 'none';
+            document.getElementById('address-section').style.display = 'block';
+            document.getElementById('more-info-section').style.display = 'none';
+        }
+
+        function showMoreInfoSection() {
+            document.getElementById('basic-info-section').style.display = 'none';
+            document.getElementById('address-section').style.display = 'none';
+            document.getElementById('more-info-section').style.display = 'block';
+        }
+
+        function validateBasicInfo() {
+            const name = document.getElementById('full-name');
+            const email = document.getElementById('email');
+            const phone = document.getElementById('phone-number');
+            const orgName = document.getElementById('organization-name');
+            const designation = document.getElementById('designation');
+            const focusedSector = document.getElementById('focused-sector');
+            const pan = document.getElementById('pan');
+
+            let valid = true;
+
+            // Clear previous error messages
+            const errorMessages = document.querySelectorAll('#basic-info-section small');
+            errorMessages.forEach(error => error.textContent = '');
+
+            // Basic validation
+            if (!name.value.trim() || !email.value.trim() || !phone.value.trim() || !orgName.value.trim() || designation.value === '' || !focusedSector.value.trim() || !pan.value.trim()) {
+                valid = false;
+            }
+
+            if (valid) {
+                showAddressSection();
+            } else {
+                alert('Please fill in the form.');
+            }
+        }
+
+        function validateAddressSection() {
+            const country = document.getElementById('country');
+            const state = document.getElementById('state');
+            const district = document.getElementById('district');
+            const zip = document.getElementById('zip');
+
+            let valid = true;
+
+            // Clear previous error messages
+            const errorMessages = document.querySelectorAll('#address-section small');
+            errorMessages.forEach(error => error.textContent = '');
+
+            // Address validation
+            if (!country.value.trim() || !state.value.trim() || !district.value.trim() || !zip.value.trim()) {
+                valid = false;
+            }
+
+            if (valid) {
+                showMoreInfoSection();
+            } else {
+                alert('Please fill in the form.');
+            }
+        }
+
+        function submitForm() {
+            const expertise = document.getElementById('expertise');
+            const stage = document.getElementById('stage');
+            const ticketSize = document.getElementById('ticketSize');
+            const network = document.querySelector('input[name="network"]:checked');
+            const learning = document.querySelector('input[name="learning"]:checked');
+
+            let valid = true;
+
+            // Clear previous error messages
+            const errorMessages = document.querySelectorAll('#more-info-section small');
+            errorMessages.forEach(error => error.textContent = '');
+
+            // More info validation
+            if (!expertise.value.trim() || stage.value === '' || ticketSize.value === '' || !network || !learning) {
+                valid = false;
+            }
+
+            if (valid) {
+                alert('Form submitted successfully!');
+                // Here you can add code to submit the form data to the server
+                // For example, using fetch or XMLHttpRequest to send data to your backend.
+            } else {
+                alert('Please fill in the form.');
+            }
+        }
+    </script>
+</body>
+
+</html>

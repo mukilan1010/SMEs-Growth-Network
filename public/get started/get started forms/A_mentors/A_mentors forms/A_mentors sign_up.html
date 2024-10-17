@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Form</title>
+    <style>
+        /* CSS Styles */
+        body {
+            font-family: 'Roboto', sans-serif; /* Modern font */
+            background-color: #e3f2fd; /* Light blue background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .signup-container {
+            background: #ffffff;
+            padding: 30px; /* Increased padding for a cleaner look */
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Softer shadow */
+            width: 350px;
+        }
+
+        .signup-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #007bff; /* Blue color for the header */
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333; /* Dark text color for better readability */
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: border-color 0.3s ease; /* Smooth border color change */
+        }
+
+        .form-group input:focus {
+            border-color: #007bff; /* Blue border on focus */
+            outline: none;
+        }
+
+        .form-group input[type="checkbox"] {
+            width: auto;
+            margin-right: 5px;
+        }
+
+        .captcha-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .captcha-container img {
+            margin-right: 10px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff; /* Blue button color */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* Smooth hover effect */
+        }
+
+        .submit-btn:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .login-link a {
+            color: #007bff; /* Blue color for links */
+            text-decoration: none;
+        }
+
+        /* Media Queries */
+        /* Larger screens */
+        @media (min-width: 768px) {
+            .signup-container {
+                width: 400px;
+                padding: 25px;
+            }
+
+            .form-group input {
+                padding: 12px;
+                font-size: 16px;
+            }
+
+            .submit-btn {
+                padding: 12px;
+            }
+        }
+
+        /* Tablets */
+        @media (min-width: 600px) and (max-width: 767px) {
+            .signup-container {
+                width: 90%;
+                padding: 20px;
+            }
+
+            .form-group input {
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            .submit-btn {
+                padding: 10px;
+            }
+        }
+
+        /* Phones */
+        @media (max-width: 599px) {
+            .signup-container {
+                width: 100%;
+                padding: 15px;
+            }
+
+            .form-group input {
+                padding: 8px;
+                font-size: 12px;
+            }
+
+            .submit-btn {
+                padding: 9px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="signup-container">
+        <h2>Signup</h2>
+        <div class="form-group">
+            <label for="first-name" class="required">First Name</label>
+            <input type="text" id="first-name" placeholder="First Name" required>
+        </div>
+        <div class="form-group">
+            <label for="last-name" class="required">Last Name</label>
+            <input type="text" id="last-name" placeholder="Last Name" required>
+        </div>
+        <div class="form-group">
+            <label for="email" class="required">Email Address</label>
+            <input type="email" id="email" placeholder="Email Address" required>
+        </div>
+        <div class="form-group">
+            <label for="phone" class="required">Phone Number</label>
+            <input type="tel" id="phone" placeholder="Phone Number" required>
+        </div>
+        <div class="form-group">
+            <label for="password" class="required">Password</label>
+            <input type="password" id="password" placeholder="Password" required>
+        </div>
+        <div class="form-group">
+            <label for="confirm-password" class="required">Confirm Password</label>
+            <input type="password" id="confirm-password" placeholder="Confirm Password" required>
+        </div>
+        <div class="form-group">
+            <input type="checkbox" id="agree" required>
+            <label for="agree">I agree to the Terms & Conditions</label>
+        </div>
+        <div class="captcha-container">
+            <img src="https://dummyimage.com/100x30/000/fff&text=R9pv4y" alt="Captcha">
+            <input type="text" id="captcha" placeholder="Enter Captcha" required>
+        </div>
+        <button class="submit-btn" onclick="submitForm()">Send OTP</button>
+        <div class="login-link">
+            <p>Have an account? <a href="#">Login</a></p>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript function to handle form submission
+        function submitForm() {
+            const firstName = document.getElementById('first-name').value;
+            const lastName = document.getElementById('last-name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const captcha = document.getElementById('captcha').value;
+            const agree = document.getElementById('agree').checked;
+
+            if (!firstName || !lastName || !email || !phone || !password || !confirmPassword || !captcha) {
+                alert("Please fill out all fields.");
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match.");
+                return;
+            }
+
+            if (!agree) {
+                alert("Please agree to the Terms & Conditions.");
+                return;
+            }
+
+            alert("Form submitted successfully!");
+        }
+    </script>
+
+</body>
+
+</html>

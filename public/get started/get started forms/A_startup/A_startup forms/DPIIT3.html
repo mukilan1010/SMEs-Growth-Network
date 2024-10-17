@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Members</title>
+
+    <style>
+        /* Basic Form Styling */
+form.multiStepForm {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Heading */
+form.multiStepForm h2 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Team Member Section */
+.team-member {
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+/* Labels and Inputs */
+form.multiStepForm label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+    color: #333;
+}
+
+.required::after {
+    content: '*';
+    color: red;
+    margin-left: 4px;
+}
+
+/* Input Fields */
+form.multiStepForm input[type="text"],
+form.multiStepForm input[type="email"],
+form.multiStepForm input[type="tel"],
+form.multiStepForm input[type="url"],
+form.multiStepForm select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+/* Focus Effects */
+form.multiStepForm input:focus,
+form.multiStepForm select:focus {
+    border-color: #66b3ff;
+    outline: none;
+}
+
+/* Add Member Button */
+form.multiStepForm button[type="button"] {
+    display: inline-block;
+    padding: 12px 20px;
+    margin-right: 10px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Submit and Previous Buttons */
+form.multiStepForm button[type="submit"],
+form.multiStepForm button[type="button"]:last-of-type {
+    background-color: #008CBA;
+}
+
+form.multiStepForm button[type="submit"]:hover,
+form.multiStepForm button[type="button"]:hover {
+    background-color: #45a049;
+}
+
+/* Form Step Buttons */
+form.multiStepForm button[type="button"]:last-of-type:hover {
+    background-color: #007bb5;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    form.multiStepForm {
+        padding: 15px;
+    }
+
+    form.multiStepForm input[type="text"],
+    form.multiStepForm input[type="email"],
+    form.multiStepForm input[type="tel"],
+    form.multiStepForm input[type="url"],
+    form.multiStepForm select {
+        font-size: 14px;
+    }
+
+    form.multiStepForm button {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+}
+
+    </style>
+    
+    
+</head>
+<body>
+    <div class="container">
+        <form id="teamForm" class="multiStepForm">
+            <div class="form-step">
+                <h2 style="text-align: center;">Team Members</h2>
+
+                <div id="teamMembersContainer">
+                    <div class="team-member">
+                        <label for="memberName" class="required">Member Name:</label>
+                        <input type="text" name="memberName[]" placeholder="Enter member name" required>
+
+                        <label for="memberRole" class="required">Role:</label>
+                        <input type="text" name="memberRole[]" placeholder="Enter member role" required>
+
+                        <label for="memberEmail" class="required">Member Email:</label>
+                        <input type="email" name="memberEmail[]" placeholder="Enter member email" required>
+
+                        <label for="phoneNumber" class="required">Phone Number:</label>
+                        <input type="tel" name="phoneNumber[]" placeholder="Enter phone number" required>
+
+                        <label for="linkedin">LinkedIn Profile:</label>
+                        <input type="url" name="linkedin[]" placeholder="Enter LinkedIn URL">
+
+                        <label for="gender">Gender:</label>
+                        <select name="gender[]">
+                            <option value="select">Select</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="button" onclick="addMember()">Add Team Member</button>
+                <button type="button" onclick="prevStep()">Previous</button>
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function addMember() {
+            const teamMembersContainer = document.getElementById('teamMembersContainer');
+            const newMember = document.createElement('div');
+            newMember.className = 'team-member';
+            newMember.innerHTML = `
+                <label for="memberName" class="required">Member Name:</label>
+                <input type="text" name="memberName[]" placeholder="Enter member name" required>
+                <label for="memberRole" class="required">Role:</label>
+                <input type="text" name="memberRole[]" placeholder="Enter member role" required>
+                <label for="memberEmail" class="required">Member Email:</label>
+                <input type="email" name="memberEmail[]" placeholder="Enter member email" required>
+                <label for="phoneNumber" class="required">Phone Number:</label>
+                <input type="tel" name="phoneNumber[]" placeholder="Enter phone number" required>
+                <label for="linkedin">LinkedIn Profile:</label>
+                <input type="url" name="linkedin[]" placeholder="Enter LinkedIn URL">
+                <label for="gender">Gender:</label>
+                <select name="gender[]">
+                    <option value="select">Select</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+            `;
+            teamMembersContainer.appendChild(newMember);
+        }
+
+        // Form submission handler
+        document.getElementById('teamForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData.entries());
+
+            try {
+                const response = await fetch('http://localhost:5000/dpiit3-form', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+                if (response.ok) {
+                    alert('Form submitted successfully!');
+                    window.location.href = "index.html"; // Redirect to Amazon after successful submission
+                } else {
+                    throw new Error(result.error || 'Failed to submit form');
+                }
+            } catch (err) {
+                console.error('Error:', err);
+                alert('There was an error submitting the form.');
+            }
+        });
+    </script>
+</body>
+</html>

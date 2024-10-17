@@ -1,0 +1,123 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to right, #004080, #0050a0); /* Background gradient */
+}
+
+.container {
+    background-color: white;
+    padding: 40px; /* Increased padding for spacious feel */
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    width: 600px; /* Fixed width */
+    text-align: center;
+}
+
+.title {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #007bff; /* Title color */
+}
+
+.subtitle {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    color: #666;
+}
+
+.profile-selection {
+    margin-bottom: 20px;
+}
+
+.profile-selection button {
+    background-color: #000080; /* Button color */
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 18px; /* Font size */
+}
+
+.role-selection {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.role-option {
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 20px; /* Increased padding for better visibility */
+    cursor: pointer;
+    width: 30%; /* Width of each role option */
+    text-align: center;
+    margin: 10px 0;
+    transition: all 0.3s;
+    font-size: 18px; /* Font size for role options */
+}
+
+.role-option.selected {
+    border-color: #000080; /* Highlight selected role */
+    background-color: #e6f0ff; /* Background color for selected */
+}
+
+.role-option:hover {
+    border-color: #000080; /* Highlight on hover */
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .container {
+        width: 90%; /* Adjusted width for smaller screens */
+        padding: 20px;
+    }
+
+    .role-option {
+        width: 45%; /* Adjusted width for tablets */
+    }
+}
+
+@media (max-width: 480px) {
+    body, html {
+        flex-direction: column; /* Stack layout on mobile */
+        height: auto;
+        padding: 20px;
+    }
+
+    .container {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .profile-selection button {
+        width: 100%;
+        padding: 10px 0;
+    }
+
+    .role-selection {
+        flex-direction: column; /* Stack role options */
+    }
+
+    .role-option {
+        width: 90%; /* Full width on mobile */
+        margin: 10px auto; /* Center role options */
+    }
+
+    .continue-button {
+        width: 100%; /* Full width continue button */
+        padding: 10px;
+    }
+}
