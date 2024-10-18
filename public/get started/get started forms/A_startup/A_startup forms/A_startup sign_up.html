@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup Form</title>
     <style>
-        /* CSS Styles */
+       
         body {
             font-family: 'Roboto', sans-serif; /* Modern font */
             background-color: #e3f2fd; /* Light blue background */
@@ -96,8 +96,7 @@
             text-decoration: none;
         }
 
-        /* Media Queries */
-        /* Larger screens */
+
         @media (min-width: 768px) {
             .signup-container {
                 width: 400px;
@@ -131,17 +130,19 @@
             }
         }
 
-        /* Phones */
+        
         @media (max-width: 599px) {
             .signup-container {
                 width: 100%;
                 padding: 15px;
             }
 
+            
             .form-group input {
                 padding: 8px;
                 font-size: 12px;
             }
+
 
             .submit-btn {
                 padding: 9px;
@@ -186,7 +187,7 @@
             <img src="https://dummyimage.com/100x30/000/fff&text=R9pv4y" alt="Captcha">
             <input type="text" id="captcha" placeholder="Enter Captcha" required>
         </div>
-        <button class="submit-btn" onclick="submitForm()">Send OTP</button>
+        <button class="submit-btn" onclick="submitForm()">Registeration</button>
         <div class="login-link">
             <p>Have an account? <a href="Log_in.html">Login</a></p>
         </div>
@@ -216,6 +217,8 @@
         alert("Please agree to the Terms & Conditions.");
         return;
     }
+    
+    
 
     // Send form data to the backend
     fetch('http://localhost:5000/signup', {
@@ -239,7 +242,7 @@
                 window.location.href = 'DPIIT.html';
             }
         } else if (data.error) {
-            alert(data.error); // If there's an error, display it
+            alert(data.error); 
         } else {
             alert("An unknown error occurred.");
         }
@@ -252,7 +255,6 @@
 
     </script>
     
-
 </body>
 
 </html>

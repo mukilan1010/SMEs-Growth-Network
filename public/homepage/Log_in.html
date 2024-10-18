@@ -139,6 +139,15 @@
                 padding: 10px;
             }
         }
+        #backgroundVideo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;  /* Ensures the video covers the entire background without stretching */
+    z-index: -1;        /* Places the video behind the content */
+}   
 
         /* Phones */
         @media (max-width: 599px) {
@@ -162,25 +171,26 @@
 </head>
 
 <body>
+    <video autoplay muted loop id="backgroundVideo">
+        <source src="c:\Users\mukil\Downloads\background-video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
 
     <div class="login-container">
-        <button class="google-btn">Continue with Google</button>
+       
 
         <form id="loginForm">
             <input type="text" id="email" placeholder="Email Address" required>
             <input type="password" id="password" placeholder="Password" required>
 
-            <div class="captcha">
-                <div class="captcha-code" id="captchaCode">rtxHdl</div>
-                <button type="button" class="captcha-refresh" onclick="generateCaptcha()">&#x21bb;</button>
-            </div>
-            <input type="text" id="captchaInput" placeholder="Enter Captcha Here" required>
+          
+            
 
             <button type="submit" class="login-btn" id="loginBtn">Login</button>
         </form>
 
         <div class="signup-link">
-            <p>Create an Account - <a href="sign_in.html">Signup</a></p>
+            <p>Create an Account - <a href="../get started/GET_STARTED.html">Signup</a></p>
         </div>
     </div>
 
@@ -190,14 +200,7 @@
             alert("Login form submitted!");
         });
 
-        function generateCaptcha() {
-            var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            var captcha = '';
-            for (var i = 0; i < 6; i++) {
-                captcha += characters.charAt(Math.floor(Math.random() * characters.length));
-            }
-            document.getElementById("captchaCode").innerText = captcha;
-        }
+       
     </script>
 
 </body>

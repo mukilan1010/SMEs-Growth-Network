@@ -15,7 +15,7 @@ mongoose.connect('mongodb+srv://mukilan291024:mukil123@cluster0.jhd6v.mongodb.ne
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
-.then(() => consoles.log('Connected to MongoDB'))
+.then(() => console.log('Connected to MongoDB'))
 .catch(err => console.error('Error connecting to MongoDB:', err));
 
 const userSchema = new mongoose.Schema({

@@ -164,18 +164,13 @@
 <body>
 
     <div class="login-container">
-        <button class="google-btn">Continue with Google</button>
+       
 
         <form id="loginForm">
             <input type="text" id="email" placeholder="Email Address" required>
             <input type="password" id="password" placeholder="Password" required>
 
-            <div class="captcha">
-                <div class="captcha-code" id="captchaCode">rtxHdl</div>
-                <button type="button" class="captcha-refresh" onclick="generateCaptcha()">&#x21bb;</button>
-            </div>
-            <input type="text" id="captchaInput" placeholder="Enter Captcha Here" required>
-
+            
             <button type="submit" class="login-btn" id="loginBtn">Login</button>
         </form>
 
@@ -190,14 +185,7 @@
             alert("Login form submitted!");
         });
 
-        function generateCaptcha() {
-            var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            var captcha = '';
-            for (var i = 0; i < 6; i++) {
-                captcha += characters.charAt(Math.floor(Math.random() * characters.length));
-            }
-            document.getElementById("captchaCode").innerText = captcha;
-        }
+        
     </script>
 
 </body>
